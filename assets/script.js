@@ -28,41 +28,48 @@ let currentIndex = 0;
 let tagLine = 0;
 
 function createDot() {
-  slides.forEach((el) => {
+  slides.forEach((el, index) => {
     let dot = document.createElement("div");
     dot.classList.add("dot");
+    if (index === 0) {
+      dot.classList.add("dot_selected");
+    }
     dotContainer.appendChild(dot);
     dot.addEventListener("click", (e) => {
-      dot.classList.toggle("dot_selected");
+      document.querySelectorAll(".dot").forEach(dot => {
+        dot.classList.remove("dot_selected");
+      });
+      dot.classList.add("dot_selected");
     });
   });
 }
 
+
 function swapImageRight() {
+  document.querySelectorAll(".dot").forEach((dot) => {
+    dot.classList.remove("dot_selected");
+  });
   if (currentIndex >= slides.length - 1) {
     currentIndex = 0;
   } else {
     currentIndex++;
   }
   slide.src = "./assets/images/slideshow/" + slides[currentIndex].image;
-  document
-    .querySelectorAll(".dot")
-    [currentIndex].classList.add("dot_selected");
+  document.querySelectorAll(".dot")[currentIndex].classList.add("dot_selected");
 }
 
 function swapImageLeft() {
+  document.querySelectorAll(".dot").forEach((dot) => {
+    dot.classList.remove("dot_selected");
+  });
   if (currentIndex <= 0) {
     currentIndex = slides.length - 1;
   } else {
     currentIndex--;
   }
   slide.src = "./assets/images/slideshow/" + slides[currentIndex].image;
-  document
-    .querySelectorAll(".dot")
-    [currentIndex].classList.remove("dot_selected");
+  document.querySelectorAll(".dot")[currentIndex].classList.add("dot_selected");
 }
-
-
 
 arrowRight.addEventListener("click", (e) => {
   swapImageRight();
