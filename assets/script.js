@@ -41,18 +41,34 @@ function createDot() {
 function swapImageRight() {
   if (currentIndex >= slides.length - 1) {
     currentIndex = 0;
-  }else{
-	currentIndex ++;
+  } else {
+    currentIndex++;
   }
   slide.src = "./assets/images/slideshow/" + slides[currentIndex].image;
-  document.querySelectorAll(".dot")[currentIndex].classList.add("dot_selected")
+  document
+    .querySelectorAll(".dot")
+    [currentIndex].classList.add("dot_selected");
 }
+
+function swapImageLeft() {
+  if (currentIndex <= 0) {
+    currentIndex = slides.length - 1;
+  } else {
+    currentIndex--;
+  }
+  slide.src = "./assets/images/slideshow/" + slides[currentIndex].image;
+  document
+    .querySelectorAll(".dot")
+    [currentIndex].classList.remove("dot_selected");
+}
+
+
 
 arrowRight.addEventListener("click", (e) => {
   swapImageRight();
 });
 arrowLeft.addEventListener("click", (e) => {
-  console.log(e);
+  swapImageLeft();
 });
 
 console.log(slides[0].image);
@@ -61,4 +77,3 @@ slide.src = "./assets/images/slideshow/" + slides[currentIndex].image;
 slide.alt = slides[currentIndex].tagLine;
 
 createDot();
-
