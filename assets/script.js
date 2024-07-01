@@ -35,15 +35,48 @@ function createDot() {
       dot.classList.add("dot_selected");
     }
     dotContainer.appendChild(dot);
+
     dot.addEventListener("click", (e) => {
-      document.querySelectorAll(".dot").forEach(dot => {
+      document.querySelectorAll(".dot").forEach((dot) => {
         dot.classList.remove("dot_selected");
       });
       dot.classList.add("dot_selected");
+      changeSlide(index);
     });
+
+    addSwipeDetection(dot, index);
   });
 }
 
+function addSwipeDetection(dot, index) {
+  let startX;
+
+  dot.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  dot.addEventListener("touchmove", (e) => {
+    if (!startX) return;
+
+    let diffX = e.touches[0].clientX - startX;
+
+    if (diffX > 50) {
+      swapImageLeft();
+      startX = null;
+    } else if (diffX < -50) {
+      swapImageRight();
+      startX = null;
+    }
+  });
+  dot.addEventListener("touchend", () => {
+    startX = null;
+  });
+}
+
+function changeSlide(index) {
+  currentIndex = index;
+  slide.src = "./assets/images/slideshow/" + slides[currentIndex].image;
+}
 
 function swapImageRight() {
   document.querySelectorAll(".dot").forEach((dot) => {
@@ -70,6 +103,8 @@ function swapImageLeft() {
   slide.src = "./assets/images/slideshow/" + slides[currentIndex].image;
   document.querySelectorAll(".dot")[currentIndex].classList.add("dot_selected");
 }
+
+
 
 arrowRight.addEventListener("click", (e) => {
   swapImageRight();
