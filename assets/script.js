@@ -25,7 +25,6 @@ const bannerImg = document.querySelectorAll(".banner-img");
 const slide = document.querySelector("#slide");
 const dotContainer = document.querySelector("#bullet_points");
 let currentIndex = 0;
-let tagLine = 0;
 
 function createDot() {
   slides.forEach((el, index) => {
@@ -116,6 +115,6 @@ arrowLeft.addEventListener("click", (e) => {
 console.log(slides[0].image);
 
 slide.src = "./assets/images/slideshow/" + slides[currentIndex].image;
-slide.alt = slides[currentIndex].tagLine;
+
 
 createDot();
