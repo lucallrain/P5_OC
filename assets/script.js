@@ -5,8 +5,7 @@ const slides = [
   },
   {
     image: "slide2.jpg",
-    tagLine:
-      "Tirages haute définition grand format <span>pour vos bureaux et events</span>",
+    tagLine: "Tirages haute définition grand format <span>pour vos bureaux et events</span>",
   },
   {
     image: "slide3.jpg",
@@ -20,9 +19,9 @@ const slides = [
 
 const arrowRight = document.querySelector(".arrow_right");
 const arrowLeft = document.querySelector(".arrow_left");
-const whiteDot = document.querySelectorAll(".dot");
 const bannerImg = document.querySelectorAll(".banner-img");
 const slide = document.querySelector("#slide");
+const tagline = document.querySelector("#tagLine");
 const dotContainer = document.querySelector("#bullet_points");
 let currentIndex = 0;
 
@@ -67,6 +66,7 @@ function addSwipeDetection(dot, index) {
       startX = null;
     }
   });
+
   dot.addEventListener("touchend", () => {
     startX = null;
   });
@@ -75,6 +75,7 @@ function addSwipeDetection(dot, index) {
 function changeSlide(index) {
   currentIndex = index;
   slide.src = "./assets/images/slideshow/" + slides[currentIndex].image;
+  tagline.innerHTML = slides[currentIndex].tagLine;
 }
 
 function swapImageRight() {
@@ -87,6 +88,7 @@ function swapImageRight() {
     currentIndex++;
   }
   slide.src = "./assets/images/slideshow/" + slides[currentIndex].image;
+  tagline.innerHTML = slides[currentIndex].tagLine;
   document.querySelectorAll(".dot")[currentIndex].classList.add("dot_selected");
 }
 
@@ -100,21 +102,19 @@ function swapImageLeft() {
     currentIndex--;
   }
   slide.src = "./assets/images/slideshow/" + slides[currentIndex].image;
+  tagline.innerHTML = slides[currentIndex].tagLine;
   document.querySelectorAll(".dot")[currentIndex].classList.add("dot_selected");
 }
-
-
 
 arrowRight.addEventListener("click", (e) => {
   swapImageRight();
 });
+
 arrowLeft.addEventListener("click", (e) => {
   swapImageLeft();
 });
 
-console.log(slides[0].image);
-
 slide.src = "./assets/images/slideshow/" + slides[currentIndex].image;
-
+tagline.innerHTML = slides[currentIndex].tagLine;
 
 createDot();
