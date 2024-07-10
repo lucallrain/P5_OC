@@ -49,27 +49,7 @@ function createDot() {
 function addSwipeDetection(dot, index) {
   let startX;
 
-  dot.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
-  });
-
-  dot.addEventListener("touchmove", (e) => {
-    if (!startX) return;
-
-    let diffX = e.touches[0].clientX - startX;
-
-    if (diffX > 50) {
-      swapImageLeft();
-      startX = null;
-    } else if (diffX < -50) {
-      swapImageRight();
-      startX = null;
-    }
-  });
-
-  dot.addEventListener("touchend", () => {
-    startX = null;
-  });
+ 
 }
 
 function changeSlide(index) {
